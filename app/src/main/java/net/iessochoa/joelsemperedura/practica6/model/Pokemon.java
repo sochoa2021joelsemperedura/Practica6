@@ -83,6 +83,25 @@ public class Pokemon implements Parcelable {
         return CREATOR;
     }
 
+    //****METODOS****//
+
+    //Busca la imagen del pokemon
+    public String getUrlImagen(){
+        String url = getUrl();
+        String[] pokemonIndex = url.split("/");
+        return (urlIMAGEN+pokemonIndex[pokemonIndex.length-1]+".png");
+    }
+    //fecha en formato local
+    public String getFechaCompraFormatoLocal(){
+        if (fechaCompra!=null){
+            DateFormat df = DateFormat.getDateInstance(DateFormat.MEDIUM,
+                    Locale.getDefault());
+            return df.format(fechaCompra);
+        }else{//si es de internet no tenemos fecha
+            return "";
+        }
+    }
+
     //****PARCELABLE****//
     @Override
     public int describeContents() {
@@ -125,22 +144,5 @@ public class Pokemon implements Parcelable {
         }
     };
 
-    //****METODOS****//
 
-    //Busca la imagen del pokemon
-    public String getUrlImagen(){
-        String url = getUrl();
-        String[] pokemonIndex = url.split("/");
-        return (urlIMAGEN+pokemonIndex[pokemonIndex.length-1]+".png");
-    }
-    //fecha en formato local
-    public String getFechaCompraFormatoLocal(){
-        if (fechaCompra!=null){
-            DateFormat df = DateFormat.getDateInstance(DateFormat.MEDIUM,
-                    Locale.getDefault());
-            return df.format(fechaCompra);
-        }else{//si es de internet no tenemos fecha
-            return "";
-        }
-    }
 }
