@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import net.iessochoa.joelsemperedura.practica6.R;
 import net.iessochoa.joelsemperedura.practica6.model.Pokemon;
+import net.iessochoa.joelsemperedura.practica6.utils.Utils;
 
 import java.util.List;
 
@@ -28,6 +29,18 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonAdapter.PokemonV
 
     @Override
     public void onBindViewHolder(@NonNull PokemonAdapter.PokemonViewHolder holder, int position) {
+
+        if (listaPokemon != null) {
+            //mostramos los valores en el cardviewfinal
+            Pokemon pokemon = listaPokemon.get(position);
+            holder.tvNombre.setText(pokemon.getNombre().toUpperCase());
+            //comprobamos si tenemos fecha por si no es de base de datos. Ya que utilizamos la misma clase
+            holder.tvFecha.setText(pokemon.getFechaCompraFormatoLocal());
+            //utilizamos Glide para mostrar la imagen
+            Utils.cargaImagen(holder.ivPokemon,pokemon.getUrlImagen());
+            //guardamos el pokemon actual
+            holder.pokemon=pokemon;
+        }
 
     }
 

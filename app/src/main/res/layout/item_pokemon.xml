@@ -34,11 +34,13 @@
 
         <ImageView
             android:id="@+id/ivPokemon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="140dp"
+            android:layout_height="140dp"
+            android:layout_marginBottom="8dp"
+            android:scaleType="fitCenter"
             app:layout_constraintBottom_toTopOf="@+id/tvFecha"
-            app:layout_constraintEnd_toEndOf="@+id/tvNombre"
-            app:layout_constraintStart_toStartOf="@+id/tvNombre"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvNombre"
             tools:srcCompat="@tools:sample/avatars" />
 

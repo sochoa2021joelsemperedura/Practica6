@@ -1,6 +1,8 @@
 package net.iessochoa.joelsemperedura.practica6.ui.pokemon;
 
+import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,13 +13,17 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import net.iessochoa.joelsemperedura.practica6.databinding.FragmentPokemonBinding;
+import net.iessochoa.joelsemperedura.practica6.ui.adapters.PokemonAdapter;
 
 public class PokemonFragment extends Fragment {
 
     private PokemonViewModel pokemonViewModel;
     private FragmentPokemonBinding binding;
+    private PokemonAdapter adapter;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -25,14 +31,16 @@ public class PokemonFragment extends Fragment {
                 new ViewModelProvider(this).get(PokemonViewModel.class);
 
         binding = FragmentPokemonBinding.inflate(inflater, container, false);
+        defineDetectarFinRecycler();
         View root = binding.getRoot();
 
-        final TextView textView = binding.textHome;
-        pokemonViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
+        adapter = new PokemonAdapter();
+        binding.rvPokemons.setAdapter(adapter);
+        binding.rvPokemons.setLayoutManager(new LinearLayoutManager(getContext()));
+        binding.rvPokemons.setBackgroundColor(Color.BLACK);
+        //Asignacion del observer al adapter//llamada al observador//
+        pokemonViewModel.getAllPokemons().observe(getViewLifecycleOwner(),listaPokemon ->{
+            adapter.setListaPokemon(listaPokemon);
         });
         return root;
     }
@@ -41,5 +49,23 @@ public class PokemonFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+    private void defineDetectarFinRecycler(){
+        binding.rvPokemons.addOnScrollListener(new RecyclerView.OnScrollListener() {
+
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+
+                //de esta forma sabemos si llega al final
+                if ((!recyclerView.canScrollVertically(1)) && (newState == RecyclerView.SCROLL_STATE_IDLE)) {
+                    Log.v("scroll", "fin recyclerview");
+                    // pbCargandoDatos.setVisibility(View.VISIBLE);
+                    //recuperamos los 20 siguientes pokemon eso hara que se active el observador
+                    pokemonViewModel.getNextPokemon();
+                }
+            }
+        });
     }
 }
