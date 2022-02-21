@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.iessochoa.joelsemperedura.practica6.R;
@@ -64,23 +65,35 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonAdapter.PokemonV
         private TextView tvFecha;
         //guardamos el pokemon para ismplificar
         private Pokemon pokemon;
+        private CardView cvItem;
 
         //**Constructor**//
         public PokemonViewHolder(@NonNull final View itemView) {
             super(itemView);
             iniciaViews();
+           /* TODO: cvItem.setOnClickListener(e->{
+                if ()
+            });
+
+            */
         }
 
         private void iniciaViews() {
             tvFecha = itemView.findViewById(R.id.tvFecha);
             tvNombre = itemView.findViewById(R.id.tvNombre);
             ivPokemon = itemView.findViewById(R.id.ivPokemon);
+            cvItem = itemView.findViewById(R.id.cvItem);
         }
 
         //recuperar pokemon cuando lo necesitemos en el listener
         public Pokemon getPokemon(){
             return pokemon;
         }
+
     }
+    public interface OnItemPokemonClickListener {
+        void onItemPokemonClick(Pokemon pokemon);
+    }
+    //TODO : public void setOnItemClickListener()
 
 }
