@@ -1,5 +1,7 @@
 package net.iessochoa.joelsemperedura.practica6.ui.favoritos;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -42,33 +45,18 @@ public class FavoritosFragment extends Fragment {
         favoritosViewModel.getAllPokemons().observe(getViewLifecycleOwner(),listaPokemon ->{
             adapter.setListaPokemon(listaPokemon);
         });
+        //TODO definirEventoSwiper();
 
         return root;
     }
-    /*TODo: Desde la pagina 6 parte 2: private void definirEventoSwiper() {
-        //Creamos el Evento de Swiper
-        ItemTouchHelper.SimpleCallback simpleItemTouchCallback =
-                new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT |
-                        ItemTouchHelper.RIGHT) {
-                    @Override
-                    public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
-                        return false;
-                    }
-
-                    @Override
-                    public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-                    //realizamos un cast del viewHolder y obtenemos el pokemon a borrarPokemonListaPokemon
-                        PokemonAdapter.PokemonViewHolder
-                                vhPokemon=(PokemonAdapter.PokemonViewHolder) viewHolder;
-                        Pokemon pokemon=vhPokemon.getPokemon();
-                      //ToDo: Aparece en la pagina 7 parte 2  borrarPokemon(pokemon, vhPokemon.getAdapterPosition());
-                        // Creamos el objeto de ItemTouchHelper que se encargará del trabajo
-                        ItemTouchHelper itemTouchHelper =
-                                new ItemTouchHelper(simpleItemTouchCallback);
 
 
-                    }
-        }
-    }*/
 
 }
+
+
+
+
+
+
+

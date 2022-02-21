@@ -47,8 +47,8 @@ public class PokemonFragment extends Fragment {
             adapter.setListaPokemon(listaPokemon);
         });
 
-        /*TODO
-        adapter.setOnItemPokemonClickListener(new PokemonAdapter.OnItemPokemonClickListener() {
+
+        adapter.setOnItemClickListener(new PokemonAdapter.OnItemPokemonClickListener() {
             @Override
             public void onItemPokemonClick(Pokemon pokemon) {
             //creamos bundle para pasar el pokemon al fragment ver_pokemon
@@ -60,7 +60,6 @@ public class PokemonFragment extends Fragment {
             }
         });
 
-         */
 
         return root;
     }

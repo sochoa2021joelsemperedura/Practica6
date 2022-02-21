@@ -11,11 +11,13 @@ import android.view.ViewGroup;
 import net.iessochoa.joelsemperedura.practica6.R;
 import net.iessochoa.joelsemperedura.practica6.databinding.FragmentVerPokemonBinding;
 import net.iessochoa.joelsemperedura.practica6.model.Pokemon;
+import net.iessochoa.joelsemperedura.practica6.ui.adapters.PokemonAdapter;
 import net.iessochoa.joelsemperedura.practica6.utils.Utils;
 
 public class VerPokemonFragment extends Fragment {
     public static final String ARG_POKEMON = "VerPokemonFragment.pokemon";
     private FragmentVerPokemonBinding binding;
+
 
     public VerPokemonFragment() {
         // Required empty public constructor
@@ -37,6 +39,9 @@ public class VerPokemonFragment extends Fragment {
         binding.tvVerNombrePokemon.setText(pokemon.getNombre().toUpperCase());
         //mostramos la imagen con Glide
         Utils.cargaImagen(binding.ivVerPokemon,pokemon.getUrlImagen());
+
+
+
         return root;
 
 

@@ -18,6 +18,7 @@ import java.util.List;
 
 public class PokemonAdapter extends RecyclerView.Adapter<PokemonAdapter.PokemonViewHolder> {
     private List<Pokemon> listaPokemon;
+    private OnItemPokemonClickListener listenerPokemon;
     //Metodo que se llamara cuando se necesite un nuevo viewHolder.
     @NonNull
     @Override
@@ -71,11 +72,15 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonAdapter.PokemonV
         public PokemonViewHolder(@NonNull final View itemView) {
             super(itemView);
             iniciaViews();
-           /* TODO: cvItem.setOnClickListener(e->{
-                if ()
-            });
-
-            */
+           cvItem.setOnClickListener(new View.OnClickListener() {
+               @Override
+               public void onClick(View view) {
+                   if (listenerPokemon != null) {
+                       listenerPokemon.onItemPokemonClick(listaPokemon.get(
+                               PokemonViewHolder.this.getAdapterPosition()));
+                   }
+               }
+           });
         }
 
         private void iniciaViews() {
@@ -94,6 +99,8 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonAdapter.PokemonV
     public interface OnItemPokemonClickListener {
         void onItemPokemonClick(Pokemon pokemon);
     }
-    //TODO : public void setOnItemClickListener()
+    public void setOnItemClickListener(OnItemPokemonClickListener listener){
+        this.listenerPokemon = listener;
+    }
 
 }
