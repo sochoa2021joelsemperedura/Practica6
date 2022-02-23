@@ -45,11 +45,63 @@ public class FavoritosFragment extends Fragment {
         favoritosViewModel.getAllPokemons().observe(getViewLifecycleOwner(),listaPokemon ->{
             adapter.setListaPokemon(listaPokemon);
         });
-        //TODO definirEventoSwiper();
+
+        //***Evento encargado de borrar objetos pokemon del fragment favoritos***//
+        definirEventoSwiper();
 
         return root;
     }
 
+    private void definirEventoSwiper() {
+
+        ItemTouchHelper.SimpleCallback simpleItemTouchCallback =
+                new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+                    @Override
+                    public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+                        return false;
+                    }
+
+                    @Override
+                    public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+                        //Cast del viewHolder y obtenemos el pokemon
+                        PokemonAdapter.PokemonViewHolder vhPokemon=(PokemonAdapter.PokemonViewHolder) viewHolder;
+                        Pokemon pokemon = vhPokemon.getPokemon(); //obtenemos el pokemon sobre el que ha actuado la accion
+                        borrarPokemon(pokemon,vhPokemon.getAdapterPosition()); //llamada al metodo borror pokemon
+                    }
+                };
+        //Item touch helper que se encargara del trabajo
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleItemTouchCallback);
+        //es asociado a nuestro recyclerview
+        itemTouchHelper.attachToRecyclerView(binding.rvPokemons);
+    }
+
+    //***Metodo Borrar Pokemon***//
+    private void borrarPokemon(Pokemon pokemon, int posicion){
+
+        //Creacion de dialogo informativo con la accion de borrar
+        AlertDialog.Builder dialogo = new AlertDialog.Builder(getContext());
+        dialogo.setTitle("Aviso");
+        dialogo.setMessage("Desea borrar a "+pokemon.getNombre());
+        //Click de cancelar
+        dialogo.setNegativeButton(android.R.string.cancel, new
+                DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        adapter.notifyItemChanged(posicion);//recuperamos la posición
+                    }
+                });
+        //Click de ok
+        dialogo.setPositiveButton(android.R.string.ok, new
+                DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        // Borramos
+                        favoritosViewModel.delete(pokemon);
+                    }
+                });
+        dialogo.show();
+
+    }
 
 
 }
