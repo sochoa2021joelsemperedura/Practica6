@@ -15,13 +15,17 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import net.iessochoa.joelsemperedura.practica6.R;
 import net.iessochoa.joelsemperedura.practica6.databinding.FragmentFavoritosBinding;
 import net.iessochoa.joelsemperedura.practica6.model.Pokemon;
+import net.iessochoa.joelsemperedura.practica6.ui.VerPokemonFragment;
 import net.iessochoa.joelsemperedura.practica6.ui.adapters.PokemonAdapter;
+import net.iessochoa.joelsemperedura.practica6.ui.pokemon.PokemonFragment;
 
 public class FavoritosFragment extends Fragment {
 
@@ -48,6 +52,18 @@ public class FavoritosFragment extends Fragment {
 
         //***Evento encargado de borrar objetos pokemon del fragment favoritos***//
         definirEventoSwiper();
+
+        adapter.setOnItemClickListener(new PokemonAdapter.OnItemPokemonClickListener() {
+            @Override
+            public void onItemPokemonClick(Pokemon pokemon) {
+                //creamos bundle para pasar el pokemon al fragment ver_pokemon
+                Bundle argumentosBundle=new Bundle();
+                argumentosBundle.putParcelable(VerPokemonFragment.ARG_POKEMON,pokemon);
+                //llamamos a la acción con el id del Navigation y el bundle
+                NavHostFragment.findNavController(FavoritosFragment.this)
+                        .navigate(R.id.action_nav_favoritos_to_verPokemonFragment,argumentosBundle);
+            }
+        });
 
         return root;
     }

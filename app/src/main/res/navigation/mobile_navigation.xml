@@ -12,14 +12,26 @@
         tools:layout="@layout/fragment_pokemon" >
         <action
             android:id="@+id/action_nav_pokemon_to_verPokemonFragment"
-            app:destination="@id/verPokemonFragment" />
+            app:destination="@id/verPokemonFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
     </fragment>
 
     <fragment
         android:id="@+id/nav_favoritos"
         android:name="net.iessochoa.joelsemperedura.practica6.ui.favoritos.FavoritosFragment"
         android:label="@string/menu_favoritos"
-        tools:layout="@layout/fragment_favoritos" />
+        tools:layout="@layout/fragment_favoritos" >
+        <action
+            android:id="@+id/action_nav_favoritos_to_verPokemonFragment"
+            app:destination="@id/verPokemonFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
+    </fragment>
     <fragment
         android:id="@+id/action_settings"
         android:name="net.iessochoa.joelsemperedura.practica6.ui.PreferenciasFragment"
