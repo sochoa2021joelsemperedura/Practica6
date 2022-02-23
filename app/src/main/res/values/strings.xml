@@ -26,4 +26,7 @@
     <string name="stAction_prueba">Prueba</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="stFinRecycler">fin recyclerview</string>
+    <string name="stIndicaPokemon">Indica el número de Pokemons por solicitud GET</string>
+    <string name="stNumeroPokemons">Numero Pokémons</string>
 </resources>

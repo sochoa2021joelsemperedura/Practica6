@@ -41,7 +41,6 @@ public class PokemonViewModel extends AndroidViewModel {
     public void delete(Pokemon pokemon){mRepository.delete(pokemon);
     }
 
-    //TODO: punto 27. esta tambien pendiente del otro viewModel en la parte 2
 
 
 }

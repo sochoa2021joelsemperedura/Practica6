@@ -2,7 +2,7 @@
     <EditTextPreference
         app:defaultValue="20"
         app:key="num_pokemons"
-app:singleLine="true"
-app:summary="Indica el número de Pokemons por solicitud GET"
-app:title="Numero Pokemons" />
+        app:singleLine="true"
+        app:summary="@string/stIndicaPokemon"
+        app:title="@string/stNumeroPokemons" />
 </PreferenceScreen>
