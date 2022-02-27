@@ -1,5 +1,6 @@
 package net.iessochoa.joelsemperedura.practica6.ui.adapters;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,6 +39,10 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonAdapter.PokemonV
             holder.tvNombre.setText(pokemon.getNombre().toUpperCase());
             //comprobamos si tenemos fecha por si no es de base de datos. Ya que utilizamos la misma clase
             holder.tvFecha.setText(pokemon.getFechaCompraFormatoLocal());
+            if (holder.tvFecha.getText() != ""){
+                holder.cvItem.setCardBackgroundColor(Color.BLACK);
+                holder.ivStar.setVisibility(View.VISIBLE);
+            }
             //utilizamos Glide para mostrar la imagen
             Utils.cargaImagen(holder.ivPokemon,pokemon.getUrlImagen());
             //guardamos el pokemon actual
@@ -67,6 +72,7 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonAdapter.PokemonV
         //guardamos el pokemon para ismplificar
         private Pokemon pokemon;
         private CardView cvItem;
+        private ImageView ivStar;
 
         //**Constructor**//
         public PokemonViewHolder(@NonNull final View itemView) {
@@ -88,6 +94,7 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonAdapter.PokemonV
             tvNombre = itemView.findViewById(R.id.tvNombre);
             ivPokemon = itemView.findViewById(R.id.ivPokemon);
             cvItem = itemView.findViewById(R.id.cvItem);
+            ivStar = itemView.findViewById(R.id.ivStar);
         }
 
         //recuperar pokemon cuando lo necesitemos en el listener

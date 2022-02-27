@@ -82,7 +82,8 @@ public class FavoritosFragment extends Fragment {
                         //Cast del viewHolder y obtenemos el pokemon
                         PokemonAdapter.PokemonViewHolder vhPokemon=(PokemonAdapter.PokemonViewHolder) viewHolder;
                         Pokemon pokemon = vhPokemon.getPokemon(); //obtenemos el pokemon sobre el que ha actuado la accion
-                        borrarPokemon(pokemon,vhPokemon.getAdapterPosition()); //llamada al metodo borror pokemon
+                        borrarPokemon(pokemon,vhPokemon.getAdapterPosition()); //llamada al metodo borrar pokemon
+                        adapter.notifyDataSetChanged();
                     }
                 };
         //Item touch helper que se encargara del trabajo
@@ -113,6 +114,7 @@ public class FavoritosFragment extends Fragment {
                     public void onClick(DialogInterface dialogInterface, int i) {
                         // Borramos
                         favoritosViewModel.delete(pokemon);
+                        adapter.notifyDataSetChanged();
                     }
                 });
         dialogo.show();
